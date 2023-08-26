@@ -1,9 +1,8 @@
 import React from 'react';
+import EarthquakeList from './components/EarthquakeList';
 
 function App() {
-    return (
-        <h1>Hello</h1>
-    )
+	return <EarthquakeList />;
 }
 
 export default App;
