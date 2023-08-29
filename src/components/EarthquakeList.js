@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Earthquake from './Earthquake';
+import Loader from './loader';
 import SearchBox from './SearchBox';
 
 const USGS_API_URL =
@@ -44,22 +45,7 @@ function EarthquakeList() {
 		// 500 --> 10 --
 	}, [query, earthquakes]);
 
-	if (loading)
-		return (
-			<>
-				<div class='lds-roller'>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-				</div>
-			</>
-		);
-
+	if (loading) return <Loader />;
 	return (
 		<>
 			<SearchBox query={query} setQuery={setQuery} />
