@@ -6,22 +6,10 @@ import SearchBox from './SearchBox';
 const USGS_API_URL =
 	'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=500'; //query parameters
 
-function EarthquakeList() {
-	const [earthquakes, setEarthQuakes] = useState([]);
+function EarthquakeList({ earthquakes, loading }) {
 	const [filteredEarthquakes, setFilteredEarthquakes] = useState([]);
-	const [loading, setLoading] = useState(true);
 	const [query, setQuery] = useState('');
-
-	useEffect(async () => {
-		const getEarthquakes = async () => {
-			setLoading(true);
-			const response = await fetch(USGS_API_URL);
-			const jsonResponse = await response.json();
-			setEarthQuakes(jsonResponse.features);
-			setLoading(false);
-		};
-		getEarthquakes();
-	}, []); // callback is a function //dependencies is an array of variables
+	 // callback is a function //dependencies is an array of variables
 	//useEffect --> whenever a variable in dependencies array changes it runs the callback
 	/**
 	 * useEffect runs when
@@ -47,7 +35,7 @@ function EarthquakeList() {
 
 	if (loading) return <Loader />;
 	return (
-		<>
+		<div className='max-w-lg mx-auto'>
 			<SearchBox query={query} setQuery={setQuery} />
 			{filteredEarthquakes.length
 				? filteredEarthquakes.map((earthqauke) => (
@@ -61,7 +49,7 @@ function EarthquakeList() {
 						/>
 				  ))
 				: renderNoResultMessage()}
-		</>
+		</div>
 	);
 }
 
